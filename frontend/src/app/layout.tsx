@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/contexts/cart-context'
+import { siteDefaultTitle, siteDescription, siteName, siteTitleTemplate } from '@/lib/site'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({ 
@@ -17,9 +18,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Mãos de Fio | Bolsas de Crochê Artesanais',
-  description: 'Bolsas de crochê feitas à mão com amor. Peças únicas e artesanais que combinam tradição, sustentabilidade e estilo boho.',
-    generator: 'v0.app'
+  title: {
+    default: siteDefaultTitle,
+    template: siteTitleTemplate,
+  },
+  description: siteDescription,
+  applicationName: siteName,
 }
 
 export default function RootLayout({

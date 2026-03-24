@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { PRODUCTS, getProductById } from '@/lib/products'
+import { siteName } from '@/lib/site'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { ProductDetails } from '@/components/product-details'
@@ -20,12 +21,12 @@ export async function generateMetadata({ params }: ProductPageProps) {
   
   if (!product) {
     return {
-      title: 'Produto não encontrado | Bella Borsa',
+      title: { absolute: `Produto não encontrado | ${siteName}` },
     }
   }
 
   return {
-    title: `${product.name} | Bella Borsa`,
+    title: product.name,
     description: product.description,
   }
 }

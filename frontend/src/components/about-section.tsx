@@ -1,4 +1,5 @@
-import { Award, Leaf, Heart } from 'lucide-react'
+import { Award, Gem, Leaf } from 'lucide-react'
+import { siteName } from '@/lib/site'
 
 export function AboutSection() {
   return (
@@ -6,14 +7,14 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-sm uppercase tracking-[0.2em] text-accent mb-3 font-medium">
-            Sobre Nós
+            A grife
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground mb-4">
-            Nossa História
+            {siteName}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            A Mãos de Fio nasceu da paixão pelo crochê e pelo trabalho artesanal. 
-            Cada peça é criada com técnicas tradicionais, preservando uma arte que passa de geração em geração.
+            Nascemos para oferecer bolsas de alto padrão, produzidas artesanalmente e lançadas em edições limitadas.
+            Duas linguagens — crochê e couro sintético — com o mesmo cuidado de acabamento e identidade numerada.
           </p>
         </div>
 
@@ -23,24 +24,24 @@ export function AboutSection() {
               <Award className="h-7 w-7 text-accent" />
             </div>
             <h3 className="font-serif text-xl font-semibold text-foreground mb-3">
-              100% Artesanal
+              100% artesanal
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Cada bolsa é feita inteiramente à mão, ponto por ponto, 
-              garantindo uma peça única e exclusiva para você.
+              Cada peça é executada manualmente, sem linha de massa. O tempo de oficina garante rigor,
+              textura e um caráter que a indústria não reproduz.
             </p>
           </div>
 
           <div className="bg-background rounded-xl p-8 text-center">
             <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-6">
-              <Heart className="h-7 w-7 text-accent" />
+              <Gem className="h-7 w-7 text-accent" />
             </div>
             <h3 className="font-serif text-xl font-semibold text-foreground mb-3">
-              Feito com Amor
+              Tiragens numeradas
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Por trás de cada peça está o carinho de artesãs que dedicam 
-              horas de trabalho manual para criar algo especial.
+              Coleções em quantidades restritas, com numeração que atesta exclusividade.
+              Para quem busca uma bolsa com história própria, não apenas um acessório.
             </p>
           </div>
 
@@ -49,11 +50,11 @@ export function AboutSection() {
               <Leaf className="h-7 w-7 text-accent" />
             </div>
             <h3 className="font-serif text-xl font-semibold text-foreground mb-3">
-              Fios Naturais
+              Materiais com propósito
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Trabalhamos com fios de algodão natural e materiais sustentáveis, 
-              respeitando o meio ambiente em cada criação.
+              Fibras naturais no crochê quando a peça pede leveza; couro sintético premium nas silhuetas estruturadas —
+              sempre com escolha consciente e acabamento de grife.
             </p>
           </div>
         </div>

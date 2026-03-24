@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Instagram, Facebook, Mail } from 'lucide-react'
+import { contactEmail, siteName } from '@/lib/site'
 
 export function Footer() {
   return (
@@ -8,10 +9,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
-            <h3 className="font-serif text-2xl font-semibold mb-4">Mãos de Fio</h3>
+            <h3 className="font-serif text-2xl font-semibold mb-4">{siteName}</h3>
             <p className="text-background/70 text-sm leading-relaxed">
-              Bolsas de crochê feitas à mão com amor. 
-              Cada peça é única, criada por artesãs que preservam a arte do crochê brasileiro.
+              Grife de bolsas feitas à mão, numeradas e em tiragens reduzidas. 
+              Crochê artesanal e couro sintético premium, com o mesmo rigor de acabamento.
             </p>
           </div>
 
@@ -65,7 +66,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-background/70 text-sm">
                 <Mail className="h-4 w-4" />
-                contato@maosdefio.com.br
+                {contactEmail}
               </li>
             </ul>
             <div className="flex gap-4 mt-6">
@@ -93,7 +94,7 @@ export function Footer() {
 
         <div className="border-t border-background/20 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-background/50 text-sm">
-            2026 Mãos de Fio. Todos os direitos reservados.
+            2026 {siteName}. Todos os direitos reservados.
           </p>
           <div className="flex gap-6">
             <Link href="/#" className="text-background/50 hover:text-background text-sm transition-colors">

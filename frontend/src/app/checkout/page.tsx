@@ -1,10 +1,11 @@
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { CheckoutForm } from '@/components/checkout-form'
+import { siteName } from '@/lib/site'
 
 export const metadata = {
-  title: 'Checkout | Bella Borsa',
-  description: 'Finalize sua compra na Bella Borsa',
+  title: 'Checkout',
+  description: `Finalize sua compra na ${siteName}.`,
 }
 
 export default function CheckoutPage() {

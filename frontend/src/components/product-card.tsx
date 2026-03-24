@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { type Product, formatPrice } from '@/lib/products'
+import { type Product, formatPrice, productLineLabels } from '@/lib/products'
 
 interface ProductCardProps {
   product: Product
@@ -18,10 +18,12 @@ export function ProductCard({ product }: ProductCardProps) {
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {/* Badge Edição Limitada */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-3 left-3 flex flex-col gap-2 items-start">
           <span className="bg-primary text-primary-foreground px-3 py-1 text-xs font-medium rounded-full">
-            Edição Limitada
+            Edição limitada
+          </span>
+          <span className="bg-background/90 text-foreground border border-border px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm">
+            {productLineLabels[product.line]}
           </span>
         </div>
         {!product.inStock && (

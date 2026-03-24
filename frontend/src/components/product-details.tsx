@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Check, Truck, Shield, RefreshCw } from 'lucide-react'
-import { type Product, formatPrice } from '@/lib/products'
+import { ArrowLeft, Truck, Shield, RefreshCw } from 'lucide-react'
+import { type Product, formatPrice, productLineLabels } from '@/lib/products'
 import { useCart } from '@/contexts/cart-context'
 import { Button } from '@/components/ui/button'
 
@@ -57,9 +57,13 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
           {/* Details Section */}
           <div className="flex flex-col">
-            <div className="mb-2">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
               <p className="text-sm uppercase tracking-[0.15em] text-accent font-medium">
                 {product.category}
+              </p>
+              <span className="text-xs text-muted-foreground">·</span>
+              <p className="text-sm uppercase tracking-[0.15em] text-muted-foreground font-medium">
+                {productLineLabels[product.line]}
               </p>
             </div>
 

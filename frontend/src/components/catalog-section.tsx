@@ -1,13 +1,19 @@
 'use client'
 
 import { useState } from 'react'
-import { PRODUCTS, CATEGORIES, getProductsByCategory } from '@/lib/products'
+import {
+  CATEGORIES,
+  PRODUCT_LINE_OPTIONS,
+  type ProductLineFilter,
+  getFilteredProducts,
+} from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { Button } from '@/components/ui/button'
 
 export function CatalogSection() {
+  const [selectedLine, setSelectedLine] = useState<ProductLineFilter>('all')
   const [selectedCategory, setSelectedCategory] = useState('Todas')
-  const filteredProducts = getProductsByCategory(selectedCategory)
+  const filteredProducts = getFilteredProducts(selectedLine, selectedCategory)
 
   return (
     <section id="colecao" className="py-20 lg:py-28 bg-background">
@@ -18,27 +24,51 @@ export function CatalogSection() {
             Explore
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground mb-4">
-            Nossa Coleção
+            Nossa coleção
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Bolsas cuidadosamente selecionadas para mulheres que valorizam qualidade, 
-            estilo e sofisticação em cada detalhe.
+            Linha crochê e linha couro sintético: silhuetas pensadas para o cotidiano e ocasiões especiais,
+            sempre em edição limitada e com numeração exclusiva.
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {CATEGORIES.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className="min-w-[80px]"
-            >
-              {category}
-            </Button>
-          ))}
+        {/* Line filter */}
+        <div className="mb-6">
+          <p className="text-center text-xs uppercase tracking-wider text-muted-foreground mb-3">
+            Linha
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {PRODUCT_LINE_OPTIONS.map((opt) => (
+              <Button
+                key={opt.value}
+                variant={selectedLine === opt.value ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedLine(opt.value)}
+              >
+                {opt.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Category filter */}
+        <div className="mb-12">
+          <p className="text-center text-xs uppercase tracking-wider text-muted-foreground mb-3">
+            Silhueta
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {CATEGORIES.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className="min-w-[80px]"
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* Product Grid */}
@@ -50,7 +80,7 @@ export function CatalogSection() {
 
         {filteredProducts.length === 0 && (
           <p className="text-center text-muted-foreground py-12">
-            Nenhum produto encontrado nesta categoria.
+            Nenhum produto encontrado com esses filtros.
           </p>
         )}
       </div>
