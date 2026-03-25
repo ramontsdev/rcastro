@@ -28,7 +28,7 @@ export function Header() {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="shrink-0">
               <h1 className="font-serif text-2xl lg:text-3xl font-semibold tracking-tight text-foreground">
                 {siteName}
               </h1>

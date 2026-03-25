@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { useCart } from '@/contexts/cart-context'
+import { type Product, formatPrice, productLineLabels } from '@/lib/products'
+import { ArrowLeft, RefreshCw, Shield, Truck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Truck, Shield, RefreshCw } from 'lucide-react'
-import { type Product, formatPrice, productLineLabels } from '@/lib/products'
-import { useCart } from '@/contexts/cart-context'
-import { Button } from '@/components/ui/button'
+import { useState } from 'react'
 
 interface ProductDetailsProps {
   product: Product
@@ -26,8 +26,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     <section className="py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <Link 
-          href="/#colecao" 
+        <Link
+          href="/#colecao"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -91,8 +91,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     onClick={() => setSelectedColor(color)}
                     className={`
                       px-4 py-2 rounded-lg border text-sm font-medium transition-all
-                      ${selectedColor === color 
-                        ? 'border-primary bg-primary text-primary-foreground' 
+                      ${selectedColor === color
+                        ? 'border-primary bg-primary text-primary-foreground'
                         : 'border-border bg-background text-foreground hover:border-primary/50'
                       }
                     `}
@@ -124,8 +124,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             </div>
 
             {/* Add to Cart */}
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="w-full mb-6"
               onClick={handleAddToCart}
               disabled={!product.inStock}
@@ -136,15 +136,15 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             {/* Benefits */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Truck className="h-5 w-5 flex-shrink-0" />
+                <Truck className="h-5 w-5 shrink-0" />
                 <span>Frete grátis acima de R$ 500</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Shield className="h-5 w-5 flex-shrink-0" />
+                <Shield className="h-5 w-5 shrink-0" />
                 <span>Garantia de 1 ano</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <RefreshCw className="h-5 w-5 flex-shrink-0" />
+                <RefreshCw className="h-5 w-5 shrink-0" />
                 <span>Troca em até 30 dias</span>
               </div>
             </div>
