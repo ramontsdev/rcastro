@@ -2,21 +2,21 @@
 
 import React from "react"
 
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowLeft, CreditCard, ShoppingBag, CheckCircle2, Lock } from 'lucide-react'
-import { useCart } from '@/contexts/cart-context'
-import { formatPrice } from '@/lib/products'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useCart } from '@/contexts/cart-context'
+import { formatPrice } from '@/lib/products'
+import { ArrowLeft, CheckCircle2, CreditCard, Lock, ShoppingBag } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
 
 export function CheckoutForm() {
   const { items, totalPrice, clearCart } = useCart()
   const [step, setStep] = useState<'cart' | 'shipping' | 'payment' | 'success'>('cart')
   const [isProcessing, setIsProcessing] = useState(false)
-  
+
   const [formData, setFormData] = useState({
     // Shipping
     fullName: '',
@@ -47,10 +47,10 @@ export function CheckoutForm() {
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsProcessing(true)
-    
+
     // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 2000))
-    
+
     setIsProcessing(false)
     setStep('success')
     clearCart()
@@ -108,8 +108,8 @@ export function CheckoutForm() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -132,8 +132,8 @@ export function CheckoutForm() {
                 }}
                 className={`
                   flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors
-                  ${step === s 
-                    ? 'bg-primary text-primary-foreground' 
+                  ${step === s
+                    ? 'bg-primary text-primary-foreground'
                     : 'bg-secondary text-muted-foreground hover:text-foreground'
                   }
                 `}
@@ -167,7 +167,7 @@ export function CheckoutForm() {
                   {items.map((item) => (
                     <li key={`${item.product.id}-${item.selectedColor}`} className="py-6 first:pt-0">
                       <div className="flex gap-4">
-                        <div className="relative w-24 h-24 bg-secondary rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="relative w-24 h-24 bg-secondary rounded-lg overflow-hidden shrink-0">
                           <Image
                             src={item.product.images[0] || "/placeholder.svg"}
                             alt={item.product.name}
@@ -199,106 +199,106 @@ export function CheckoutForm() {
                 <h2 className="font-serif text-xl font-semibold text-foreground">
                   Dados de Entrega
                 </h2>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2">
                     <Label htmlFor="fullName">Nome completo</Label>
-                    <Input 
-                      id="fullName" 
-                      name="fullName" 
+                    <Input
+                      id="fullName"
+                      name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="email">E-mail</Label>
-                    <Input 
-                      id="email" 
-                      name="email" 
+                    <Input
+                      id="email"
+                      name="email"
                       type="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="phone">Telefone</Label>
-                    <Input 
-                      id="phone" 
-                      name="phone" 
+                    <Input
+                      id="phone"
+                      name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="zipCode">CEP</Label>
-                    <Input 
-                      id="zipCode" 
-                      name="zipCode" 
+                    <Input
+                      id="zipCode"
+                      name="zipCode"
                       value={formData.zipCode}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div className="sm:col-span-2">
                     <Label htmlFor="address">Endereço</Label>
-                    <Input 
-                      id="address" 
-                      name="address" 
+                    <Input
+                      id="address"
+                      name="address"
                       value={formData.address}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="number">Número</Label>
-                    <Input 
-                      id="number" 
-                      name="number" 
+                    <Input
+                      id="number"
+                      name="number"
                       value={formData.number}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="complement">Complemento</Label>
-                    <Input 
-                      id="complement" 
-                      name="complement" 
+                    <Input
+                      id="complement"
+                      name="complement"
                       value={formData.complement}
                       onChange={handleInputChange}
                     />
                   </div>
                   <div>
                     <Label htmlFor="neighborhood">Bairro</Label>
-                    <Input 
-                      id="neighborhood" 
-                      name="neighborhood" 
+                    <Input
+                      id="neighborhood"
+                      name="neighborhood"
                       value={formData.neighborhood}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="city">Cidade</Label>
-                    <Input 
-                      id="city" 
-                      name="city" 
+                    <Input
+                      id="city"
+                      name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="state">Estado</Label>
-                    <Input 
-                      id="state" 
-                      name="state" 
+                    <Input
+                      id="state"
+                      name="state"
                       value={formData.state}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                 </div>
@@ -330,50 +330,50 @@ export function CheckoutForm() {
                     <span>Pagamento seguro com criptografia SSL</span>
                   </div>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div>
                     <Label htmlFor="cardNumber">Número do cartão</Label>
-                    <Input 
-                      id="cardNumber" 
-                      name="cardNumber" 
+                    <Input
+                      id="cardNumber"
+                      name="cardNumber"
                       placeholder="0000 0000 0000 0000"
                       value={formData.cardNumber}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div>
                     <Label htmlFor="cardName">Nome no cartão</Label>
-                    <Input 
-                      id="cardName" 
-                      name="cardName" 
+                    <Input
+                      id="cardName"
+                      name="cardName"
                       value={formData.cardName}
                       onChange={handleInputChange}
-                      required 
+                      required
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="expiry">Validade</Label>
-                      <Input 
-                        id="expiry" 
-                        name="expiry" 
+                      <Input
+                        id="expiry"
+                        name="expiry"
                         placeholder="MM/AA"
                         value={formData.expiry}
                         onChange={handleInputChange}
-                        required 
+                        required
                       />
                     </div>
                     <div>
                       <Label htmlFor="cvv">CVV</Label>
-                      <Input 
-                        id="cvv" 
-                        name="cvv" 
+                      <Input
+                        id="cvv"
+                        name="cvv"
                         placeholder="123"
                         value={formData.cvv}
                         onChange={handleInputChange}
-                        required 
+                        required
                       />
                     </div>
                   </div>

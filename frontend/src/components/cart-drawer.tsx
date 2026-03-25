@@ -1,11 +1,11 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { X, Plus, Minus, ShoppingBag } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { useCart } from '@/contexts/cart-context'
 import { formatPrice } from '@/lib/products'
-import { Button } from '@/components/ui/button'
+import { Minus, Plus, ShoppingBag, X } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export function CartDrawer() {
   const { items, isOpen, setIsOpen, updateQuantity, removeItem, totalPrice } = useCart()
@@ -15,18 +15,18 @@ export function CartDrawer() {
   return (
     <>
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-50"
         onClick={() => setIsOpen(false)}
         aria-hidden="true"
       />
-      
+
       {/* Drawer */}
       <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-background z-50 shadow-2xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
           <h2 className="font-serif text-xl font-semibold text-foreground">Seu Carrinho</h2>
-          <button 
+          <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-secondary rounded-full transition-colors"
             aria-label="Fechar carrinho"
@@ -53,7 +53,7 @@ export function CartDrawer() {
               {items.map((item) => (
                 <li key={`${item.product.id}-${item.selectedColor}`} className="p-4">
                   <div className="flex gap-4">
-                    <div className="relative w-24 h-24 bg-secondary rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="relative w-24 h-24 bg-secondary rounded-lg overflow-hidden shrink-0">
                       <Image
                         src={item.product.images[0] || "/placeholder.svg"}
                         alt={item.product.name}
@@ -67,7 +67,7 @@ export function CartDrawer() {
                       <p className="text-sm font-semibold text-foreground mt-1">
                         {formatPrice(item.product.priceInCents)}
                       </p>
-                      
+
                       <div className="flex items-center gap-2 mt-2">
                         <button
                           onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
