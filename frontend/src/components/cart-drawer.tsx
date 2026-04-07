@@ -51,7 +51,7 @@ export function CartDrawer() {
           ) : (
             <ul className="divide-y divide-border">
               {items.map((item) => (
-                <li key={`${item.product.id}-${item.selectedColor}`} className="p-4">
+                <li key={item.id} className="p-4">
                   <div className="flex gap-4">
                     <div className="relative w-24 h-24 bg-secondary rounded-lg overflow-hidden shrink-0">
                       <Image
@@ -70,7 +70,7 @@ export function CartDrawer() {
 
                       <div className="flex items-center gap-2 mt-2">
                         <button
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           className="p-1 hover:bg-secondary rounded transition-colors"
                           aria-label="Diminuir quantidade"
                         >
@@ -80,14 +80,14 @@ export function CartDrawer() {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
                           className="p-1 hover:bg-secondary rounded transition-colors"
                           aria-label="Aumentar quantidade"
                         >
                           <Plus className="h-4 w-4 text-foreground" />
                         </button>
                         <button
-                          onClick={() => removeItem(item.product.id)}
+                          onClick={() => removeItem(item.id)}
                           className="ml-auto p-1 text-muted-foreground hover:text-destructive transition-colors"
                           aria-label="Remover item"
                         >
@@ -112,11 +112,23 @@ export function CartDrawer() {
             <p className="text-xs text-muted-foreground">
               Frete calculado no checkout
             </p>
-            <Link href="/checkout" onClick={() => setIsOpen(false)}>
-              <Button className="w-full" size="lg">
-                Finalizar Compra
-              </Button>
-            </Link>
+            <div className="space-y-2">
+              <Link href="/checkout" onClick={() => setIsOpen(false)} className="block">
+                <Button className="w-full" size="lg">
+                  Finalizar compra
+                </Button>
+              </Link>
+              <p className="text-center text-xs text-muted-foreground">
+                <Link
+                  href="/entrar?redirect=/checkout"
+                  onClick={() => setIsOpen(false)}
+                  className="font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  Entrar
+                </Link>{' '}
+                se já tiver cadastro
+              </p>
+            </div>
           </div>
         )}
       </div>

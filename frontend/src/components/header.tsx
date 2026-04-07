@@ -2,6 +2,7 @@
 
 import { CartDrawer } from '@/components/cart-drawer'
 import { Button } from '@/components/ui/button'
+import { useAuth } from '@/contexts/auth-context'
 import { useCart } from '@/contexts/cart-context'
 import { siteName } from '@/lib/site'
 import { Menu, Search, ShoppingBag, X } from 'lucide-react'
@@ -11,6 +12,7 @@ import { useState } from 'react'
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { totalItems, setIsOpen } = useCart()
+  const { user, isAuthenticated, isReady, logout } = useAuth()
 
   return (
     <>
@@ -63,7 +65,27 @@ export function Header() {
             </nav>
 
             {/* Right section */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
+              {isReady && isAuthenticated ? (
+                <>
+                  <span
+                    className="hidden max-w-[140px] truncate text-sm text-muted-foreground md:inline"
+                    title={user?.email}
+                  >
+                    {user?.name?.split(' ')[0] ?? user?.email}
+                  </span>
+                  <Button variant="ghost" size="sm" className="hidden md:inline-flex" asChild>
+                    <Link href="/conta/pedidos">Meus pedidos</Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="hidden sm:inline-flex" onClick={() => logout()}>
+                    Sair
+                  </Button>
+                </>
+              ) : isReady ? (
+                <Button variant="outline" size="sm" className="hidden sm:inline-flex" asChild>
+                  <Link href="/entrar">Entrar</Link>
+                </Button>
+              ) : null}
               <Button variant="ghost" size="icon" className="hidden sm:flex">
                 <Search className="h-5 w-5" />
                 <span className="sr-only">Buscar</span>
@@ -118,6 +140,38 @@ export function Header() {
               >
                 Contato
               </Link>
+              {isReady && isAuthenticated ? (
+                <>
+                  <p className="pt-2 text-sm text-muted-foreground">
+                    Olá, {user?.name?.split(' ')[0]}
+                  </p>
+                  <Link
+                    href="/conta/pedidos"
+                    className="block rounded-md border border-border py-2 text-center text-base font-medium text-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Meus pedidos
+                  </Link>
+                  <button
+                    type="button"
+                    className="block w-full rounded-md border border-border py-2 text-center text-base font-medium text-foreground"
+                    onClick={() => {
+                      logout()
+                      setMobileMenuOpen(false)
+                    }}
+                  >
+                    Sair
+                  </button>
+                </>
+              ) : isReady ? (
+                <Link
+                  href="/entrar"
+                  className="block rounded-md bg-primary py-2 text-center text-base font-medium text-primary-foreground"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Entrar
+                </Link>
+              ) : null}
             </div>
           </nav>
         )}

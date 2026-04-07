@@ -7,12 +7,26 @@ import { makeResendVerificationCodeController } from '@/main/factories/controlle
 import { makeResetPasswordController } from '@/main/factories/controllers/authentication/resetPasswordControllerFactory';
 import { makeSignInController } from '@/main/factories/controllers/authentication/signInControllerFactory';
 import { makeSignUpController } from '@/main/factories/controllers/authentication/signUpControllerFactory';
+import {
+  authPasswordOrVerificationEmailRateLimiter,
+  authSignInRateLimiter,
+  authSignUpRateLimiter,
+  authTokenBodyRateLimiter,
+} from '@/main/middlewares/expressRateLimiters';
 
 export const authRoutes = Router();
 
-authRoutes.post('/sign-in', adaptExpressRoute(makeSignInController()));
-authRoutes.post('/sign-up', adaptExpressRoute(makeSignUpController()));
-authRoutes.post('/confirm-email', adaptExpressRoute(makeConfirmEmailController()));
-authRoutes.post('/forgot-password', adaptExpressRoute(makeForgotPasswordController()));
-authRoutes.post('/reset-password', adaptExpressRoute(makeResetPasswordController()));
-authRoutes.post('/resend-verification-code', adaptExpressRoute(makeResendVerificationCodeController()));
+authRoutes.post('/sign-in', authSignInRateLimiter, adaptExpressRoute(makeSignInController()));
+authRoutes.post('/sign-up', authSignUpRateLimiter, adaptExpressRoute(makeSignUpController()));
+authRoutes.post('/confirm-email', authTokenBodyRateLimiter, adaptExpressRoute(makeConfirmEmailController()));
+authRoutes.post(
+  '/forgot-password',
+  authPasswordOrVerificationEmailRateLimiter,
+  adaptExpressRoute(makeForgotPasswordController()),
+);
+authRoutes.post('/reset-password', authTokenBodyRateLimiter, adaptExpressRoute(makeResetPasswordController()));
+authRoutes.post(
+  '/resend-verification-code',
+  authPasswordOrVerificationEmailRateLimiter,
+  adaptExpressRoute(makeResendVerificationCodeController()),
+);

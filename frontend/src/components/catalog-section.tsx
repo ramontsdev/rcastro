@@ -5,15 +5,21 @@ import {
   CATEGORIES,
   PRODUCT_LINE_OPTIONS,
   type ProductLineFilter,
-  getFilteredProducts,
+  type Product,
 } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { Button } from '@/components/ui/button'
 
-export function CatalogSection() {
+export function CatalogSection({ products }: { products: Product[] }) {
   const [selectedLine, setSelectedLine] = useState<ProductLineFilter>('all')
   const [selectedCategory, setSelectedCategory] = useState('Todas')
-  const filteredProducts = getFilteredProducts(selectedLine, selectedCategory)
+  let filteredProducts = products
+  if (selectedLine !== 'all') {
+    filteredProducts = filteredProducts.filter((p) => p.line === selectedLine)
+  }
+  if (selectedCategory !== 'Todas') {
+    filteredProducts = filteredProducts.filter((p) => p.category === selectedCategory)
+  }
 
   return (
     <section id="colecao" className="py-20 lg:py-28 bg-background">

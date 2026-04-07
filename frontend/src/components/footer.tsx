@@ -97,10 +97,10 @@ export function Footer() {
             2026 {siteName}. Todos os direitos reservados.
           </p>
           <div className="flex gap-6">
-            <Link href="/#" className="text-background/50 hover:text-background text-sm transition-colors">
+            <Link href="/politica-de-privacidade" className="text-background/50 hover:text-background text-sm transition-colors">
               Política de Privacidade
             </Link>
-            <Link href="/#" className="text-background/50 hover:text-background text-sm transition-colors">
+            <Link href="/termos-de-uso" className="text-background/50 hover:text-background text-sm transition-colors">
               Termos de Uso
             </Link>
           </div>

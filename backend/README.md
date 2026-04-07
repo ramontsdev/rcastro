@@ -1,6 +1,6 @@
-# 🔐 Backend Auth Example API
+# RCastro Store — API (backend)
 
-Uma API completa de autenticação desenvolvida com Node.js, Express, TypeScript e Prisma, seguindo os princípios de Clean Architecture.
+API **Express** do monorepo [`rcastro-store`](../): autenticação (JWT, e-mail), e-commerce (pedidos, Stripe via porta agnóstica, webhooks, SES para confirmação de compra) e PostgreSQL com Prisma, em **Clean Architecture**.
 
 ## 📋 Índice
 
@@ -41,13 +41,21 @@ Uma API completa de autenticação desenvolvida com Node.js, Express, TypeScript
   - Envio de emails de boas-vindas
   - Códigos de verificação
   - Recuperação de senha
+  - Confirmação de pedido (pós-pagamento)
   - Integração com AWS SES
+
+- **🛍️ E-commerce (opcional em runtime)**
+
+  - Checkout: `POST /api/checkout/session` (Stripe Checkout hospedado)
+  - Webhook: `POST /api/webhooks/payment`
+  - Modelos: produtos, pedidos, pagamentos — ver `prisma/models/Commerce.prisma` e [`docs/pagamentos-arquitetura-agnostica.md`](../docs/pagamentos-arquitetura-agnostica.md)
 
 - **🛡️ Segurança**
   - Senhas criptografadas com bcrypt
   - Tokens JWT seguros
   - Validação de dados com Zod
   - CORS configurado
+  - Headers HTTP (Helmet) e rate limiting em rotas sensíveis
 
 ## 🛠️ Tecnologias
 
@@ -82,11 +90,10 @@ src/
 
 ## 🚀 Instalação
 
-1. **Clone o repositório**
+1. **Entre na pasta do backend** (repositório monorepo)
 
 ```bash
-git clone https://github.com/ramontsdev/backend-auth-example.git
-cd backend-auth-example
+cd rcastro-store/backend
 ```
 
 2. **Instale as dependências**
@@ -98,8 +105,8 @@ pnpm install
 3. **Configure o banco de dados**
 
 ```bash
-# Crie um banco PostgreSQL chamado 'auth_example_db'
-createdb auth_example_db
+# Ajuste o nome em DATABASE_URL (.env); exemplo:
+# createdb rcastro_store_db
 ```
 
 4. **Execute as migrações**

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { PRODUCTS, getProductById } from '@/lib/products'
+import { fetchCommerceProductBySlug } from '@/lib/commerce-products'
 import { siteName } from '@/lib/site'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -9,15 +9,9 @@ interface ProductPageProps {
   params: Promise<{ id: string }>
 }
 
-export async function generateStaticParams() {
-  return PRODUCTS.map((product) => ({
-    id: product.id,
-  }))
-}
-
 export async function generateMetadata({ params }: ProductPageProps) {
   const { id } = await params
-  const product = getProductById(id)
+  const product = await fetchCommerceProductBySlug(id).catch(() => null)
   
   if (!product) {
     return {
@@ -33,7 +27,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params
-  const product = getProductById(id)
+  const product = await fetchCommerceProductBySlug(id).catch(() => null)
 
   if (!product) {
     notFound()

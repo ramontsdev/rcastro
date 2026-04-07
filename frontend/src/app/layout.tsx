@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { AuthProvider } from '@/contexts/auth-context'
 import { CartProvider } from '@/contexts/cart-context'
 import { siteDefaultTitle, siteDescription, siteName, siteTitleTemplate } from '@/lib/site'
 import './globals.css'
@@ -24,6 +25,13 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: siteName,
+  metadataBase: new URL('https://rcastro.com.br'),
+  openGraph: {
+    type: 'website',
+    siteName,
+    title: siteDefaultTitle,
+    description: siteDescription,
+  },
 }
 
 export default function RootLayout({
@@ -34,9 +42,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${cormorant.variable} ${inter.variable} font-sans antialiased`}>
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
         <Analytics />
       </body>
     </html>

@@ -7,14 +7,19 @@
   "author": "Ramon Nunes",
   "license": "ISC",
   "packageManager": "pnpm@10.12.3",
+  "prisma": {
+    "seed": "tsx -r tsconfig-paths/register --env-file .env ./prisma/seed.ts"
+  },
   "scripts": {
     "dev": "tsx watch -r tsconfig-paths/register --env-file .env ./src/main/server.ts",
     "build": "npm run prisma:generate && tsc && tsc-alias -p tsconfig.json && cp -r src/main/db dist/main/",
     "start": "node -r tsconfig-paths/register --env-file .env ./dist/main/server.js",
+    "smoke": "tsx -r tsconfig-paths/register --env-file .env ./src/main/scripts/smoke.ts",
     "prisma:generate": "prisma generate --schema=./prisma/",
     "prisma:migrate": "prisma migrate dev --schema=./prisma/",
     "prisma:studio": "prisma studio --schema=./prisma/",
-    "lint": "eslint --config eslint.config.js \"src/**/*.{js,ts}\"",
+    "prisma:seed": "prisma db seed --schema=./prisma/",
+    "lint": "eslint --config eslint.config.mjs \"src/**/*.{js,ts}\"",
     "typecheck": "tsc --noEmit",
     "lint:fix": "npm run lint -- --fix",
     "docker:up": "docker compose up",
@@ -26,7 +31,10 @@
     "@prisma/client": "^7.1.0",
     "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.3.1",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
+    "stripe": "^17.7.0",
     "zod": "^4.1.5"
   },
   "devDependencies": {
