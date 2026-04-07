@@ -5,6 +5,7 @@ node_modules/
 
 # files
 .env
+env.txt
 
 # OS X
 .DS_Store
